@@ -1,11 +1,11 @@
 const express = require('express');
-const cors = require('cors');
 const app = express();
+const cors = require('cors');
 
 const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:', request.path)
-  console.log('Body:', request.body)
+  console.log('Method: ', request.method)
+  console.log('Path: ', request.path)
+  console.log('Body: ', request.body)
   console.log('---')
   next()
 }
@@ -40,26 +40,12 @@ let notes = [
   }
 ]
 
+app.get('/', (request, response) => {
+  response.send('<h1>Hello World</h1>')
+})
+
 app.get('/api/notes', (request, response) => {
   response.json(notes)
-})
-
-app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const note = notes.find(note => note.id === id)
-  
-  if (note) {
-    response.json(note)
-  } else {
-    response.status(404).end()
-  }
-})
-
-app.delete('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
-  notes = notes.filter(note => note.id !== id)
-
-  response.status(204).end()
 })
 
 const genetareId = () => {
@@ -88,6 +74,26 @@ app.post('/api/notes', (request, response) => {
   notes = notes.concat(note)
 
   response.json(note)
+})
+
+app.get('/api/notes/:id', (request, response) => {
+  const id = Number(request.params.id)
+  const note = notes.find(note => note.id === id)
+  
+  if (note) {
+    response.json(note)
+  } else {
+    response.status(404).end()
+  }
+
+  response.json(note)
+})
+
+app.delete('/api/notes/:id', (request, response) => {
+  const id = Number(request.params.id)
+  notes = notes.filter(note => note.id !== id)
+
+  response.status(204).end()
 })
 
 app.use(unknownEndpoint)
