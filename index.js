@@ -1,8 +1,8 @@
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const Note = require('./models/note');
+require('dotenv').config()
+const express = require('express')
+const app = express()
+const cors = require('cors')
+const Note = require('./models/note')
 
 
 
@@ -16,7 +16,7 @@ const requestLogger = (request, response, next) => {
 
 app.use(cors())
 app.use(express.static('build'))
-app.use(express.json());
+app.use(express.json())
 app.use(requestLogger)
 
 app.get('/', (request, response) => {
@@ -31,13 +31,6 @@ app.get('/api/notes', (request, response) => {
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
-}
-
-const genetareId = () => {
-  const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => n.id))
-    : 0
-  return maxId + 1
 }
 
 app.post('/api/notes', (request, response, next) => {
@@ -101,7 +94,8 @@ app.put('/api/notes/:id', (request, response, next) => {
 app.use(unknownEndpoint)
 
 const errorHanlder = (error, request, response, next) => {
-  console.log(error.message);
+  console.log(error.message)
+  console.log(error.name)
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
@@ -115,7 +109,7 @@ const errorHanlder = (error, request, response, next) => {
 
 app.use(errorHanlder)
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`)
 })
