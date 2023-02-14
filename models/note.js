@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', false)
 
@@ -8,10 +8,10 @@ console.log('connecting to', url)
 
 mongoose.connect(url)
   .then(result => {
-    console.log('connected to mongoDB');
+    console.log('connected to mongoDB')
   })
   .catch(error => {
-    console.log('error connecting to mongoDB:', error.message);
+    console.log('error connecting to mongoDB:', error.message)
   })
 
 // field validation
