@@ -8,7 +8,8 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "shx rm -rf build && cd C:/Users/augus/OneDrive/Escritorio/FullstackOpen/part2/notes && npm run build && cp -r build C:/Users/augus/OneDrive/Escritorio/FullstackOpen/part3/notes-backend",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
+    "lint": "eslint ."
   },
   "author": "Augusto Seta",
   "license": "MIT",
@@ -19,6 +20,7 @@
     "mongoose": "^6.9.1"
   },
   "devDependencies": {
+    "eslint": "^8.34.0",
     "nodemon": "^2.0.20",
     "shx": "^0.3.4"
   }
